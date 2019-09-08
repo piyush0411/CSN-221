@@ -1,0 +1,37 @@
+.count_Increase:
+	add count,count,1
+
+
+mov count,0						//Initial value of count is kept 0, if value becomes bigger than 2-Ramanujan no.
+mov r1,1						//Starting with no. 11, we will check unti7l we get the first Ramanujan no.
+.loop:
+	mov r2,1					//Taking initial values of the two variables as 1 each and then incrementing
+	mov r3,1					//First we increment r3, and then r2
+		.loop1:
+			.loop2:
+				mul r4,r2,r2
+				mul r4,r4,r2
+				mul r5,r3,r3
+				mul r5,r5,r3
+				add r6,r4,r5
+				cmp r6,r1		//Sum of the cubes of two variables is compared with the no. itself
+				beq .count_Increase	// If two values same, count_Increase function is called
+
+				add r3,r3,1		//register r3 is incremented
+				cmp r3,r1		//r3 is compared with r1
+				blt .loop2		//If r3<r1, loop2 is executed again
+
+				add r2,r2,1		//register r2 is incremented
+				cmp r2,r1		//r2 is compared with r1
+				blt .loop1		//If r2<r1, loop1 is executed
+
+				cmp count,2		//Value of count comaperd with 2
+				bgt .exit		//If count>2, no. is Ramanujan no. and the program is closed
+ 
+	mov count,0					//If the no. is not Ramanujan No. count is made 0
+	add r1,r1,1					//The no. to be tested is incremented
+	b .loop						//loop is run again for the new no.
+
+.exit:
+	exit
+
